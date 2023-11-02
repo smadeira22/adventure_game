@@ -10,6 +10,12 @@ let item2 = 'broken key';
 let item3 = 'glass';
 let item4 = 'burned note';
 
+// CONDITIONS
+let fireON = true;
+let burntNote = false
+let glassBottle = false
+let key = false
+
 // TIMER STOPS IF USER RUNS OUT OF TIME
 function failed(){
     console.log("Time is out...");
@@ -48,16 +54,26 @@ function exitDoor(){
 }
 
 function shelf(){
-    console.log("Ontop of the shelf you see an array of glass bottles & beakers containing a collection of mysterious objects")
-    //prompt the user to select if they want to check out something on the shelf or move on
-    /*  if (choice === 'x')
-            do this
-        else if (choice === 'y)
-            do this
-        else
-            do this
-    */
+    console.log("Ontop of the shelf you see an array of glass bottles & beakers containing a collection of mysterious objects and liquids")
+    console.log("[Look around the shelf] [pick up a bottle] [walk away]")
+    //prompt the user
+    switch(expression){
+        case 'lookaround':
+            console.log("you move aside glasses waving your hands around seeing if you could find anything")
+            console.log("but all you get is a spliter")
+            //options
+            break;
+        case 'pickbottle':
+            console.log("")
+            if(burntNote){
+                // pour liquid on burnt peice of paper
+            } else {
+                // dont know what to do with the bottle
+            }
+            //options()
+    }
 }
+
 
 function bookCase(){
     console.log("inside the lone bookcase you see various books behind the plain of glass")
@@ -73,15 +89,37 @@ function bookCase(){
 }
 
 function firePlace(){
-    console.log("at the end of the room there sits a dim fireplace, the coals still hot with only a small flame showing")
-    //prompt the user to select if they want to check out something on the shelf or move on
-    /*  if (choice === 'x')
-            do this
-        else if (choice === 'y)
-            do this
-        else
-            do this
-    */
+    console.log("at the end of the room there sits a dim fireplace,")
+    console.log("the coals still hot with only a small flame showing.")
+    if(fireON){
+        console.log("looking at the fire you get a strange feeling, will you act on it?")
+        console.log("[Put out fire] [Warm yourself] [Walk away]")
+        // prompt the user ofr input
+        switch(expression){
+            case 'putOut':
+                fireON = false
+                console.log("the cold begins to creep into your body as soon as you watch the fire go out under your foot")
+                console.log("underneath your foot you notice a peice of torn paper, half burnt with indistinguishable letter written on it besides a few words")
+                console.log("you make out H...2.., thats all you can make out")
+                console.log("You put the note into your pocket, what are you going to do next")
+                burntNote = true
+                // options()
+                break;
+            case 'warmyourself':
+                console.log("you feel a slight sense of peace as you warm yourself next to the fickle flame infront of you")
+                console.log("[You feel better about the situation]")
+                // options()
+                break;
+            case 'walk away':
+                console.log("You turn away from the fire, there's better things to do right now")
+                // options()
+                break;
+        }
+    } else {
+        console.log("staring at the cold fire you wonder if putting it out was the right decision")
+        console.log("[Your hands start to feel numb]")
+        // options()
+    }
 }
 // EVENTS //
 

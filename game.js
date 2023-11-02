@@ -13,7 +13,7 @@ let item4 = 'burned note';
 // CONDITIONS
 let fireON = true;
 let burntNote = false
-let glassBottle = false
+let bookClue = false
 let key = false
 
 // TIMER STOPS IF USER RUNS OUT OF TIME
@@ -42,15 +42,13 @@ function checkInventory(){
 
 // LOCATIONS //
 function exitDoor(){
-    for(let i=0; i<inventory.length; i++){
-        if(inventory[i] === key){
-            // prompt the user to open the wooden door using the key
-            gameEnd()    
-        } else {
-            console.log("Atop the stairs is an old but sturdy wooden door with a singlular iron lock")
-            choices()
-        } 
-    }
+    if(key){
+        // prompt the user to open the wooden door using the key
+        gameEnd()    
+    } else {
+        console.log("Atop the stairs is an old but sturdy wooden door with a singlular iron lock")
+        //options()
+    } 
 }
 
 function shelf(){
@@ -60,17 +58,23 @@ function shelf(){
     switch(expression){
         case 'lookaround':
             console.log("you move aside glasses waving your hands around seeing if you could find anything")
-            console.log("but all you get is a spliter")
-            //options
+            console.log("but all you get is a splinter")
+            //options()
             break;
         case 'pickbottle':
             console.log("")
             if(burntNote){
                 // pour liquid on burnt peice of paper
+                bookClue = true
             } else {
                 // dont know what to do with the bottle
             }
             //options()
+            break;
+        case walkaway:
+            console.log("You walk away from the old rotting shelf, what to do now?")
+            //options()
+            break;
     }
 }
 
@@ -78,14 +82,28 @@ function shelf(){
 function bookCase(){
     console.log("inside the lone bookcase you see various books behind the plain of glass")
     console.log("the draws are unlocked and slighty opened")
-    //prompt the user to select if they want to check out something on the shelf or move on
-    /*  if (choice === 'x')
-            do this
-        else if (choice === 'y)
-            do this
-        else
-            do this
-    */
+    console.log("[check in the loose draws][open the glass hatch][walk away]")
+    //prompt the user
+    switch(expression){
+        case 'checkDraws':
+            // nothing but cobwebs
+            //options
+            break;
+        case 'openGlassHatch':
+            if(bookClue){
+                // look for specific book and open it
+                // key falls out
+                key = true
+            } else {
+                // stare at the books, none of them seem interesting
+            }
+            //options()
+            break;
+        case walkaway:
+            console.log("Nothing interests you in the bookshelf?")
+            //options()
+            break;
+    }
 }
 
 function firePlace(){
@@ -94,7 +112,7 @@ function firePlace(){
     if(fireON){
         console.log("looking at the fire you get a strange feeling, will you act on it?")
         console.log("[Put out fire] [Warm yourself] [Walk away]")
-        // prompt the user ofr input
+        // prompt the user for input
         switch(expression){
             case 'putOut':
                 fireON = false
@@ -121,13 +139,15 @@ function firePlace(){
         // options()
     }
 }
-// EVENTS //
-
 // GAME START //
+function gameStart(){
+    instructions()
+    return 1
+}
 
 // GAME END //
 function gameEnd(){
-    return 1
+    return 0
 }
 
 // INSTRUCTIONS //

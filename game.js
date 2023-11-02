@@ -120,9 +120,9 @@ function firePlace(){
     console.log("the coals still hot with only a small flame showing.")
     if(fireON){
         console.log("looking at the fire you get a strange feeling, will you act on it?")
-        console.log("[put out fire] [warm yourself] [walk away]")
+        console.log("  [put out fire] [warm yourself] [walk away]  ")
         let choice = prompt()
-        switch(expression){
+        switch(choice){
             case 'put out fire':
                 fireON = false
                 console.log("the cold begins to creep into your body as soon as you watch the fire go out under your foot")

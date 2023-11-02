@@ -1,7 +1,8 @@
 //const escapeDungeon = require('./determineWinner.js');
 
-/*const prompt = require('prompt-sync')();
-const color = require('ansi-colors');*/
+const ps = require('prompt-sync');
+const prompt = ps()
+// const color = require('ansi-colors');
 
 // ITEMS // NOT NEEDED?? I GUESS
 let exitDoor = 'closed';
@@ -47,34 +48,40 @@ function exitDoor(){
         gameEnd()    
     } else {
         console.log("Atop the stairs is an old but sturdy wooden door with a singlular iron lock")
-        //options()
+        choices()
     } 
 }
 
 function shelf(){
     console.log("Ontop of the shelf you see an array of glass bottles & beakers containing a collection of mysterious objects and liquids")
-    console.log("[Look around the shelf] [pick up a bottle] [walk away]")
-    //prompt the user
-    switch(expression){
-        case 'lookaround':
+    console.log("  [look around] [pick up a bottle] [walk away]  ")
+    let choice = prompt()
+    switch(choice){
+        case 'look around':
             console.log("you move aside glasses waving your hands around seeing if you could find anything")
             console.log("but all you get is a splinter")
-            //options()
+            choices()
             break;
-        case 'pickbottle':
+        case 'pick up a bottle':
             console.log("")
             if(burntNote){
-                // pour liquid on burnt peice of paper
+                console.log("You look at the bottles and see one called Cleaner")
+                console.log("You take it and pour a little over the burnt paper and rub it in")
+                console.log("The title of a book page called Potions is on the paper")
+                console.log("A book about potions huh...")
                 bookClue = true
             } else {
-                // dont know what to do with the bottle
+                console.log("Bottles line the shelf, some are labeld parts, liquid, potions")
             }
-            //options()
+            console.log("..what to do, what to do")
+            choices()
             break;
-        case walkaway:
+        case 'walk away':
             console.log("You walk away from the old rotting shelf, what to do now?")
-            //options()
+            choices()
             break;
+        default:
+            shelf()
     }
 }
 
@@ -82,14 +89,14 @@ function shelf(){
 function bookCase(){
     console.log("inside the lone bookcase you see various books behind the plain of glass")
     console.log("the draws are unlocked and slighty opened")
-    console.log("[check in the loose draws][open the glass hatch][walk away]")
-    //prompt the user
-    switch(expression){
-        case 'checkDraws':
+    console.log("  [check draws] [open glass hatch] [walk away]  ")
+    let choice = prompt()
+    switch(choice){
+        case 'check draws':
             // nothing but cobwebs
-            //options
+            choices()
             break;
-        case 'openGlassHatch':
+        case 'open glass hatch':
             if(bookClue){
                 // look for specific book and open it
                 // key falls out
@@ -97,12 +104,14 @@ function bookCase(){
             } else {
                 // stare at the books, none of them seem interesting
             }
-            //options()
+            choices()
             break;
-        case walkaway:
+        case 'walk away':
             console.log("Nothing interests you in the bookshelf?")
-            //options()
+            choices()
             break;
+        default:
+            bookCase()
     }
 }
 
@@ -111,32 +120,34 @@ function firePlace(){
     console.log("the coals still hot with only a small flame showing.")
     if(fireON){
         console.log("looking at the fire you get a strange feeling, will you act on it?")
-        console.log("[Put out fire] [Warm yourself] [Walk away]")
-        // prompt the user for input
+        console.log("[put out fire] [warm yourself] [walk away]")
+        let choice = prompt()
         switch(expression){
-            case 'putOut':
+            case 'put out fire':
                 fireON = false
                 console.log("the cold begins to creep into your body as soon as you watch the fire go out under your foot")
                 console.log("underneath your foot you notice a peice of torn paper, half burnt with indistinguishable letter written on it besides a few words")
-                console.log("you make out H...2.., thats all you can make out")
+                console.log("you make out Po&#ion£, thats all you can make out")
                 console.log("You put the note into your pocket, what are you going to do next")
                 burntNote = true
-                // options()
+                choices()
                 break;
-            case 'warmyourself':
+            case 'warm yourself':
                 console.log("you feel a slight sense of peace as you warm yourself next to the fickle flame infront of you")
                 console.log("[You feel better about the situation]")
-                // options()
+                choices()
                 break;
             case 'walk away':
                 console.log("You turn away from the fire, there's better things to do right now")
-                // options()
+                choices()
                 break;
+            default:
+                firePlace()
         }
     } else {
         console.log("staring at the cold fire you wonder if putting it out was the right decision")
         console.log("[Your hands start to feel numb]")
-        // options()
+        choices()
     }
 }
 // GAME START //
@@ -160,7 +171,7 @@ function instructions(){
 
 // CHOICES //
 function choices(){
-    console.log("looking around the room you see a few places worth looking")
+    console.log("Where should i look around?")
     console.log("  [Shelf]  [Bookcase]  [Fireplace]  [Old Door]  ")
     // user prompt
     switch(expression) {

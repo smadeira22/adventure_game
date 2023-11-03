@@ -1,4 +1,9 @@
 ## Dungeon Escape
 
-- run `npm run install` to install libraries
-- hello from me
+Welcome to the dungeon escape game!
+More nstructions will be displayed during the game!
+
+
+- To install librariesrun `npm run install` 
+- To start the game run `node game.js`
+- Good luck!!

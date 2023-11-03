@@ -5,7 +5,7 @@ const prompt = require('prompt-sync')();
 // ITEMS //
 let exitDoor = 'closed';
 let item1 = 'key';
-let item2 = 'broken key';
+let item2 = 'spider';
 let item3 = 'glass';
 let item4 = 'burned note';
 
@@ -16,25 +16,28 @@ let bookClue = false
 let key = false
 
 // INVENTORY //
-let userInventory = ['apple', 'tissue', 'pen'];
+let userInventory = ['apple', 'pen'];
 
 
 // LOCATIONS //
 function exitDungeon(){
     if(key){
-        console.log("You hold the key in your hands, it fits perfectly into the lock")
-        console.log("  [open exit door]:1 [walk away]:2  ")
+        console.log("You hold the key in your hands, it fits perfectly into the lock.")
+        console.log("  [open]:1 [walk away]:2  ")
         let choice = prompt()
         switch(choice){
             case '1':
-                console.log("YOU WIN!!!!!");
+                console.log("YOU HAVE ESCAPED!!!!!");
                 break;
             case '2':
                 choices()
                 break;
+            default :
+                console.log("I didn't catch that")
+                exitDungeon();
         }
     } else {
-        console.log("Atop the stairs is an old but sturdy wooden door with a singlular iron lock")
+        console.log("Atop the stairs is an old but sturdy wooden door with a singlular iron lock.")
         console.log("[There must be a key somewhere]")
         choices()
     } 
@@ -43,25 +46,28 @@ function exitDungeon(){
 
 function shelf(){
     let carryOn = true
-    console.log("Ontop of the shelf you see an array of glass bottles & beakers containing a collection of mysterious objects and liquids")
+    console.log("Atop the shelf you see an array of bottles containing a collection of mysterious objects and liquids.")
     while(carryOn){
-        console.log("  [look around]:1 [pick up a bottle]:2 [walk away]:3 [view inventory]:4 ")
+        console.log("  [check shelf]:1 [pick up a bottle]:2 [walk away]:3 [view inventory]:4 ")
         let choice = prompt()
         switch(choice){
             case '1':
-                console.log("you move aside glasses waving your hands around seeing if you could find anything")
-                console.log("but all you get is a splinter")
+                console.log("Rubbing your hands over the shelf,")
+                console.log("you reach to try find something further back but all you get is a splinter.")
+                console.log("[blood slowly drips down from your finger]")
                 break;
             case '2':
                 console.log("")
                 if(burntNote && bookClue === false){
-                    console.log("You look at the bottles and see one called Cleaner")
-                    console.log("You take it and pour a little over the burnt paper and rub it in")
-                    console.log("The title of a book page called Potions is on the paper")
+                    console.log("You look at the bottles and see one labled Cleaner")
+                    console.log("Pouring it all over the burnt paper you begin to rub it in")
+                    console.log("The title of a book page is revealed...Potions.")
                     console.log("A book about potions huh...")
                     bookClue = true
+                    carryOn = false
                 } else {
-                    console.log("Bottles line the shelf, some are labeld parts, liquid, potions")
+                    console.log("Bottles line the shelf, some contain parts, liquids, and some are potions,")
+                    console.log("you check them out but nothing stands out")
                 }
                 console.log("..what to do, what to do")
                 break;
@@ -83,10 +89,10 @@ function shelf(){
 
 function bookCase(){
     let carryOn = true
-    console.log("inside the lone bookcase you see various books behind the plain of glass")
-    console.log("the draws are unlocked and slighty opened")
+    console.log("Inside the lone bookcase you see various books behind the plain of glass")
+    console.log("the drawers are unlocked and slighty opened")
     while(carryOn){
-        console.log("  [check draws]:1 [open glass hatch]:2 [walk away]:3 [view inventory]:4 ")
+        console.log("  [check drawers]:1 [open glass hatch]:2 [walk away]:3 [view inventory]:4 ")
         let choice = prompt()
         switch(choice){
             case '1':
@@ -97,7 +103,7 @@ function bookCase(){
                     console.log("Searching through the book case you spot an old dusty book in the back")
                     console.log('The spine reads "Everyday Potions"')
                     console.log("picking up the book you notice it's heavier than the others and once you open it")
-                    console.log("a old rusty key falls to the ground send a loud noise echoing in the damp empty room")
+                    console.log("a old rusty key falls to the ground sending a loud noise echoing through the damp empty room")
                     key = true
                     userInventory.push(item1);
                 } else {
@@ -122,7 +128,7 @@ function bookCase(){
 
 function firePlace(){
     let carryOn = true
-    console.log("at the end of the room there sits a fireplace,")
+    console.log("At the end of the room there sits a fireplace,")
     if(fireON){
         console.log("the coals still hot with only a small flame showing.")
         console.log("looking at the fire you get a strange feeling, will you act on it?")
@@ -132,15 +138,17 @@ function firePlace(){
             switch(choice){
                 case '1':
                     fireON = false
-                    console.log("the cold begins to creep into your body as soon as you watch the fire go out under your foot")
-                    console.log("underneath your foot you notice a peice of torn paper, half burnt with indistinguishable letter written on it besides a few words")
-                    console.log("you make out Po&#ion£, thats all you can make out")
-                    console.log("You put the note into your pocket")
+                    console.log("The cold begins to creep into your body as soon as you watch the fire go out under your foot")
+                    console.log("However, underneath you notice a peice of torn paper, half burnt with indistinguishable letter written on it")
+                    console.log("you make out Po&#ion£, but nothing more")
+                    console.log("[You put the note into your pocket]")
+                    userInventory.push(item4);
                     burntNote = true
+                    carryOn = false
                     break;
                 case '2':
-                    console.log("you feel a slight sense of peace as you warm yourself next to the fickle flame infront of you")
-                    console.log("[You feel better about the situation]")
+                    console.log("Feeling a slight sense of peace as you warm yourself next to the fickle flame infront of you")
+                    console.log("You feel a little better about the situation")
                     break;
                 case '3':
                     console.log("You turn away from the fire, there's better things to do right now")
@@ -156,8 +164,8 @@ function firePlace(){
         }
         choices()
     } else {
-        console.log("staring at it you wonder if putting the fire out was the right decision")
-        console.log("[Your hands start to feel numb]")
+        console.log("Staring at it you wonder if putting the fire out was the right decision")
+        console.log("[Your hands start to feel numb as cold creeps in]")
         choices()
     }
 
@@ -166,7 +174,7 @@ function firePlace(){
 // INSTRUCTIONS //
 function instructions(){
     console.log("Welcome to 'Escape The Dungeon' adventure game.")
-    console.log("Your tasked is to find hidden items around the Dungeon to aid in your escape.") 
+    console.log("Your task is to find hidden items around the Dungeon to aid in your escape.") 
     console.log("Be careful you only have a certain amount of time to escape.")
 }
 
@@ -180,7 +188,7 @@ function ForceEnd(){
 // CHOICES //
 function choices(){
     console.log("Where should i look around?")
-    console.log("  [shelf]:1  [bookcase]:2 [fireplace]:3  [old door]:4 [give up]:q")
+    console.log("  [shelf]:1  [bookcase]:2 [fireplace]:3  [old door]:4 [view inventory]:5 [give up]:q")
     let choice = prompt()
     switch(choice) {
         case '1':
@@ -195,21 +203,21 @@ function choices(){
         case '4':
             exitDungeon()
             break;
+        case '5':
+            console.log(userInventory);
+            choices()
+            break;
         case 'q':
-            console.log('You have given up');
-            console.log('You will stay in the dungeon forever');
+            console.log('You have given up!');
+            console.log('You will stay in the dungeon forever :((');
             break;
         default:
             console.log("I didn't catch that");
             choices()
     }
-    clearTimeout();
-}
-
-function gameEnd(){
+    //clearTimeout();
     return null;
 }
-
 
 function game(){ 
     instructions();
@@ -222,9 +230,10 @@ function game(){
         return null;
     }
     console.log('You are now inside the jungle and need to find your way out ASAP before the guard comes!')
-    console.log('yYu have three minutes ')
+    // console.log('You have three minutes ')
     choices(); 
-        
+   // clearInterval();
+    return null;
 }
 
 game();
